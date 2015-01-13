@@ -41,6 +41,9 @@ RUN chmod 755 /usr/local/sbin/symfony-app-init.sh
 ADD app/composer /usr/local/bin/composer
 RUN chmod 755 /usr/local/bin/composer
 RUN chown root.root /usr/local/bin/composer
+ADD app/console /usr/local/bin/console
+RUN chmod 755 /usr/local/bin/console
+RUN chown root.root /usr/local/bin/console
 ENV APP_RUN_MODE dev
 
 # Others
