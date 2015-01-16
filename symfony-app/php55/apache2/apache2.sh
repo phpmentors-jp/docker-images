@@ -8,8 +8,8 @@ if [ "x$APP_PHP_INI" != "x" ]; then
     fi
 
     if [ -e "$APP_PHP_INI" ]; then
-        ln -s "$APP_PHP_INI" /etc/php5/apache2/conf.d/99-app.ini
-        ln -s "$APP_PHP_INI" /etc/php5/cli/conf.d/99-app.ini
+        ln -sf "$APP_PHP_INI" /etc/php5/apache2/conf.d/99-app.ini
+        ln -sf "$APP_PHP_INI" /etc/php5/cli/conf.d/99-app.ini
     fi
 fi
 
