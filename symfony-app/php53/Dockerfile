@@ -36,7 +36,7 @@ ADD php5/app.ini /etc/php5/apache2/conf.d/90-app.ini
 ADD php5/app.ini /etc/php5/cli/conf.d/90-app.ini
 
 # Symfony application
-ADD app/app-init.sh /usr/local/sbin/symfony-app-init.sh
+ADD app/init.sh /usr/local/sbin/symfony-app-init.sh
 RUN chmod 755 /usr/local/sbin/symfony-app-init.sh
 ADD app/composer /usr/local/bin/composer
 RUN chmod 755 /usr/local/bin/composer
