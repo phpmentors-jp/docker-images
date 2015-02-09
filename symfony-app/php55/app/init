@@ -10,8 +10,6 @@ database_user="root"
 database_password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD"
 secret=`apg -a 1 -M nl -n 1 -m 40 -E ghijklmnopqrstuvwxyz`
 
-COMPOSER_CACHE_DIR="${application_dir}/.composer"
-
 if [ "x$APACHE_RUN_USER" = "x" ]; then
     echo "ERROR: The environment variable \"APACHE_RUN_USER\" does not exist."
 
