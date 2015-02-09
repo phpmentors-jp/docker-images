@@ -28,8 +28,8 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 EXPOSE 80
 ADD apache2/app.conf /etc/apache2/sites-available/000-default.conf
-ADD apache2/apache2.sh /usr/local/sbin/symfony-app-apache2.sh
-RUN chmod 755 /usr/local/sbin/symfony-app-apache2.sh
+ADD apache2/apache2 /usr/local/sbin/symfony-app-apache2
+RUN chmod 755 /usr/local/sbin/symfony-app-apache2
 
 # PHP5
 ADD php5/app.ini /etc/php5/apache2/conf.d/90-app.ini
