@@ -34,6 +34,7 @@ RUN chmod 755 /usr/local/sbin/symfony-app-apache2.sh
 # PHP5
 ADD php5/app.ini /etc/php5/apache2/conf.d/90-app.ini
 ADD php5/app.ini /etc/php5/cli/conf.d/90-app.ini
+ADD php5/timezone.sh /usr/local/sbin/symfony-app-php-timezone.sh
 
 # Symfony application
 ADD app/init.sh /usr/local/sbin/symfony-app-app-init.sh
@@ -46,9 +47,14 @@ RUN chmod 755 /usr/local/bin/console
 RUN chown root.root /usr/local/bin/console
 ENV APP_RUN_MODE dev
 
+# System
+ADD system/init /usr/local/sbin/symfony-app-system-init
+RUN chmod 755 /usr/local/sbin/symfony-app-system-init
+ADD system/timezone.sh /usr/local/sbin/symfony-app-system-timezone.sh
+
 # Others
 ENV HOME /root
 WORKDIR /root
 
 # Command
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/local/sbin/symfony-app-system-init"]
