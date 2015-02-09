@@ -37,8 +37,8 @@ ADD php5/app.ini /etc/php5/cli/conf.d/90-app.ini
 ADD php5/timezone.sh /usr/local/sbin/symfony-app-php-timezone.sh
 
 # Symfony application
-ADD app/init.sh /usr/local/sbin/symfony-app-app-init.sh
-RUN chmod 755 /usr/local/sbin/symfony-app-app-init.sh
+ADD app/init /usr/local/sbin/symfony-app-app-init
+RUN chmod 755 /usr/local/sbin/symfony-app-app-init
 ADD app/composer /usr/local/bin/composer
 RUN chmod 755 /usr/local/bin/composer
 RUN chown root.root /usr/local/bin/composer
