@@ -1,5 +1,7 @@
 #!/bin/bash
 
+script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 application_dir="/var/app"
 parameters_file="${application_dir}/app/config/parameters.yml"
 secret=`apg -a 1 -M nl -n 1 -m 40 -E ghijklmnopqrstuvwxyz`
@@ -140,6 +142,12 @@ if [ $linked_database = "1" ]; then
 fi
 
 sed -i "s/^\\( *secret:\\).*/\\1 ${secret}/" "$parameters_file"
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+    exit $RETVAL
+fi
+
+"$script_dir/symfony-app-make-app-accessible" "$application_dir"
 RETVAL=$?
 if [ $RETVAL -ne 0 ]; then
     exit $RETVAL

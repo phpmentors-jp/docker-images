@@ -17,6 +17,7 @@ RUN apt-get install -y git
 RUN apt-get install -y less vim-tiny
 RUN apt-get install -y apg
 RUN apt-get install -y sudo
+RUN apt-get install -y libfile-slurp-perl
 
 # Supervisor
 RUN mkdir -p /var/log/supervisor
@@ -45,6 +46,9 @@ RUN chown root.root /usr/local/bin/composer
 ADD app/console /usr/local/bin/console
 RUN chmod 755 /usr/local/bin/console
 RUN chown root.root /usr/local/bin/console
+ADD app/make-app-accessible /usr/local/sbin/symfony-app-make-app-accessible
+RUN chmod 755 /usr/local/sbin/symfony-app-make-app-accessible
+RUN chown root.root /usr/local/sbin/symfony-app-make-app-accessible
 ENV APP_RUN_MODE dev
 
 # System
