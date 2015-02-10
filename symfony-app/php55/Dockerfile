@@ -54,6 +54,7 @@ ENV APP_RUN_MODE dev
 # System
 ADD system/init /usr/local/sbin/symfony-app-system-init
 RUN chmod 755 /usr/local/sbin/symfony-app-system-init
+ADD system/locale.sh /usr/local/sbin/symfony-app-system-locale.sh
 ADD system/timezone.sh /usr/local/sbin/symfony-app-system-timezone.sh
 
 # Others

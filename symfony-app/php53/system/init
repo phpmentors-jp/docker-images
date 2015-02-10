@@ -3,6 +3,7 @@
 typeset script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 . "$script_dir/symfony-app-php-timezone.sh"
+. "$script_dir/symfony-app-system-locale.sh"
 . "$script_dir/symfony-app-system-timezone.sh"
 
 if [ "x$TZ" != "x" ]; then
@@ -11,6 +12,10 @@ if [ "x$TZ" != "x" ]; then
     if [ $RETVAL -eq 0 ]; then
         _symfony_app_php_timezone_configure "$TZ"
     fi
+fi
+
+if [ "x$LANG" != "x" ]; then
+    _symfony_app_system_locale_configure "$LANG"
 fi
 
 /usr/bin/supervisord
