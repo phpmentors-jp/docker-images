@@ -16,13 +16,7 @@ function _php_app_php_timezone_configure() {
         return 1
     fi
 
-    echo "date.timezone=$timezone" >> /etc/php5/apache2/conf.d/90-app.ini
-    RETVAL=$?
-    if [ $RETVAL -ne 0 ]; then
-        return $RETVAL
-    fi
-
-    echo "date.timezone=$timezone" >> /etc/php5/cli/conf.d/90-app.ini
+    echo "date.timezone=$timezone" >> /etc/php5/conf.d/90-app.ini
     RETVAL=$?
     if [ $RETVAL -ne 0 ]; then
         return $RETVAL

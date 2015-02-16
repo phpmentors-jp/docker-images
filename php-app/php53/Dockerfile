@@ -35,8 +35,7 @@ RUN chmod 755 /usr/local/sbin/apache2
 # PHP5
 ENV PHP_INI ""
 ENV XDEBUG_REMOTE_PORT ""
-ADD php5/app.ini /etc/php5/apache2/conf.d/90-app.ini
-ADD php5/app.ini /etc/php5/cli/conf.d/90-app.ini
+ADD php5/app.ini /etc/php5/conf.d/90-app.ini
 ADD php5/timezone.sh /usr/local/sbin/php5-timezone.sh
 
 # PHP application
