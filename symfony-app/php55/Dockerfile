@@ -2,64 +2,24 @@
 # symfony-app
 #
 
-FROM ubuntu:14.04
+FROM phpmentors/php-app:php55
 MAINTAINER KUBO Atsuhiro <kubo@iteman.jp>
 
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get install -y apt-utils
-RUN apt-get install -y supervisor
-RUN apt-get install -y apache2-mpm-prefork
-RUN apt-get install -y mysql-client-core-5.6
-RUN apt-get install -y php5 php5-curl php5-intl php5-mysql php5-xdebug
-RUN apt-get install -y git
-RUN apt-get install -y less vim-tiny
-RUN apt-get install -y apg
-RUN apt-get install -y sudo
 RUN apt-get install -y libfile-slurp-perl
 
-# Supervisor
-RUN mkdir -p /var/log/supervisor
-ADD supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 # Apache2
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/log/apache2
-EXPOSE 80
-ADD apache2/app.conf /etc/apache2/sites-available/000-default.conf
-ADD apache2/apache2 /usr/local/sbin/symfony-app-apache2
-RUN chmod 755 /usr/local/sbin/symfony-app-apache2
-
-# PHP5
-ADD php5/app.ini /etc/php5/apache2/conf.d/90-app.ini
-ADD php5/app.ini /etc/php5/cli/conf.d/90-app.ini
-ADD php5/timezone.sh /usr/local/sbin/symfony-app-php-timezone.sh
+ENV APP_DOCUMENT_ROOT /var/app/web
+ADD apache2/passenv.patch /tmp/apache2-passenv.patch
+RUN patch /etc/apache2/sites-available/000-default.conf /tmp/apache2-passenv.patch
 
 # Symfony application
-ADD app/init /usr/local/sbin/symfony-app-app-init
-RUN chmod 755 /usr/local/sbin/symfony-app-app-init
-ADD app/composer /usr/local/bin/composer
-RUN chmod 755 /usr/local/bin/composer
-RUN chown root.root /usr/local/bin/composer
+ENV APP_RUN_MODE dev
 ADD app/console /usr/local/bin/console
 RUN chmod 755 /usr/local/bin/console
 RUN chown root.root /usr/local/bin/console
-ADD app/make-app-accessible /usr/local/sbin/symfony-app-make-app-accessible
-RUN chmod 755 /usr/local/sbin/symfony-app-make-app-accessible
-RUN chown root.root /usr/local/sbin/symfony-app-make-app-accessible
-ENV APP_RUN_MODE dev
-
-# System
-ADD system/init /usr/local/sbin/symfony-app-system-init
-RUN chmod 755 /usr/local/sbin/symfony-app-system-init
-ADD system/locale.sh /usr/local/sbin/symfony-app-system-locale.sh
-ADD system/timezone.sh /usr/local/sbin/symfony-app-system-timezone.sh
-
-# Others
-ENV HOME /root
-WORKDIR /root
-
-# Command
-CMD ["/usr/local/sbin/symfony-app-system-init"]
+ADD app/make-app-accessible /usr/local/sbin/app-make-app-accessible
+RUN chmod 755 /usr/local/sbin/app-make-app-accessible
+RUN chown root.root /usr/local/sbin/app-make-app-accessible
+ADD app/init /tmp/app-init
+RUN cat /usr/local/sbin/app-init /tmp/app-init | sed -e 's/^#!\/bin\/bash//' > /tmp/new-app-init
+RUN sed -i '1i #!/bin/bash' /tmp/new-app-init && cp /tmp/new-app-init /usr/local/sbin/app-init && rm /tmp/new-app-init
