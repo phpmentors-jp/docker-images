@@ -57,6 +57,7 @@ ADD system/timezone.sh /usr/local/sbin/system-timezone.sh
 # Others
 ENV HOME /root
 WORKDIR /root
+VOLUME /var/app
 
 # Command
 CMD ["/usr/local/sbin/system-init"]
