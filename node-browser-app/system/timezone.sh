@@ -1,8 +1,8 @@
 #!/bin/bash
 
-function _node_browser_app_system_timezone_configure() {
+function _system_timezone_configure() {
     if [ $# -lt 1 ]; then
-        echo 'Usage: _node_browser_app_system_timezone_configure <timezone>'
+        echo 'Usage: _system_timezone_configure <timezone>'
 
         return 1
     fi

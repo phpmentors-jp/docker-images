@@ -1,8 +1,8 @@
 #!/bin/bash
 
-function _node_browser_app_system_locale_configure() {
+function _system_locale_configure() {
     if [ $# -lt 1 ]; then
-        echo 'Usage: _node_browser_app_system_locale_configure <lang>'
+        echo 'Usage: _system_locale_configure <lang>'
 
         return 1
     fi
