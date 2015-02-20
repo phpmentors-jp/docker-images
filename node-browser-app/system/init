@@ -13,4 +13,4 @@ if [ "x$TZ" != "x" ]; then
     _node_browser_app_system_timezone_configure "$TZ"
 fi
 
-/usr/bin/supervisord
+/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
