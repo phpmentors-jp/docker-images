@@ -13,11 +13,12 @@ RUN apt-get install -y apt-utils
 
 # MySQL
 ADD config/characterset.cnf /etc/mysql/conf.d/characterset.cnf
-ADD bin/configure-character-set-and-timezone.sh /tmp/configure-character-set-and-timezone.sh
-RUN cat /tmp/configure-character-set-and-timezone.sh /entrypoint.sh | sed -e 's/^#!\/bin\/bash//' > /new-entrypoint.sh
-RUN sed -i '1i #!/bin/bash' /new-entrypoint.sh && cp /new-entrypoint.sh /entrypoint.sh && rm /new-entrypoint.sh
+ADD mysql/init /usr/local/sbin/mysql-init
+RUN sed -i 's/^\(#!\/bin\/bash\)/\1\n\/usr\/local\/sbin\/system-init/' /entrypoint.sh
 
 # System
 RUN dpkg-reconfigure -f noninteractive locales
+ADD system/init /usr/local/sbin/system-init
+RUN chmod 755 /usr/local/sbin/system-init
 ADD system/locale.sh /usr/local/sbin/system-locale.sh
 ADD system/timezone.sh /usr/local/sbin/system-timezone.sh
