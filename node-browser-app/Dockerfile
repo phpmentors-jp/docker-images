@@ -22,8 +22,6 @@ ADD supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # System
 RUN dpkg-reconfigure -f noninteractive locales
-ENV TZ "UTC"
-ENV LANG "C"
 ADD system/init /usr/local/sbin/system-init
 RUN chmod 755 /usr/local/sbin/system-init
 ADD system/locale.sh /usr/local/sbin/system-locale.sh
