@@ -7,14 +7,14 @@ typeset script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 . "$script_dir/system-timezone.sh"
 
 if [ "x$LANG" != "x" ]; then
-    _php_app_system_locale_configure "$LANG"
+    _system_locale_configure "$LANG"
 fi
 
 if [ "x$TZ" != "x" ]; then
-    _php_app_system_timezone_configure "$TZ"
+    _system_timezone_configure "$TZ"
     RETVAL=$?
     if [ $RETVAL -eq 0 ]; then
-        _php_app_php_timezone_configure "$TZ"
+        _php_timezone_configure "$TZ"
     fi
 fi
 

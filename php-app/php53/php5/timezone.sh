@@ -1,8 +1,8 @@
 #!/bin/bash
 
-function _php_app_php_timezone_configure() {
+function _php_timezone_configure() {
     if [ $# -lt 1 ]; then
-        echo 'Usage: _php_app_php_timezone_configure <timezone>'
+        echo 'Usage: _php_timezone_configure <timezone>'
 
         return 1
     fi
