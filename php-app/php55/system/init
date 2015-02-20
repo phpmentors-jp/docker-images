@@ -18,4 +18,4 @@ if [ "x$TZ" != "x" ]; then
     fi
 fi
 
-/usr/bin/supervisord
+/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
