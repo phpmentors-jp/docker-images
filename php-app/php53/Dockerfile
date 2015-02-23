@@ -31,6 +31,7 @@ EXPOSE 80
 ADD apache2/app.conf /etc/apache2/sites-available/default
 ADD apache2/apache2 /usr/local/sbin/apache2
 RUN chmod 755 /usr/local/sbin/apache2
+RUN a2enmod rewrite
 
 # PHP5
 ENV PHP_INI ""
