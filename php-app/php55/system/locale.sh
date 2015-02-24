@@ -16,5 +16,14 @@ function _system_locale_configure() {
         return $RETVAL
     fi
 
+    update-locale LANG="$lang"
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]; then
+        return $RETVAL
+    fi
+
+    export LANG="$lang"
+    export LANGUAGE="$lang"
+
     return 0
 }
