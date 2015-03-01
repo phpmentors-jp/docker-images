@@ -1,0 +1,8 @@
+#!/bin/bash
+umask 0002
+JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
+MAVEN_HOME="/usr/local/maven"
+application_dir="/var/app"
+
+cd $application_dir
+"${MAVEN_HOME}/bin/mvn" "$@"
