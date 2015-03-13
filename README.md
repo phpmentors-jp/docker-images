@@ -6,6 +6,7 @@
 * [phpmentors/php-app](https://registry.hub.docker.com/u/phpmentors/php-app/) based on [ubuntu](https://registry.hub.docker.com/_/ubuntu/)
 * [phpmentors/mysql](https://registry.hub.docker.com/u/phpmentors/mysql/) based on [mysql](https://registry.hub.docker.com/_/mysql/)
 * [phpmentors/symfony-app](https://registry.hub.docker.com/u/phpmentors/symfony-app/) based on [phpmentors/php-app](https://registry.hub.docker.com/u/phpmentors/php-app/)
+* [phpmentors/tomcat-app](https://registry.hub.docker.com/u/phpmentors/tomcat-app/) based on [tomcat](https://registry.hub.docker.com/_/tomcat/)
 
 ## Support
 
