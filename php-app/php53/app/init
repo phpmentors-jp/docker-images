@@ -34,7 +34,7 @@ if [ $RETVAL -ne 0 ]; then
     exit $RETVAL
 fi
 
-find "${application_dir}" -type f ! -perm -g=w -exec chmod g+w '{}' \;
+find "${application_dir}" -type f ! -perm -g+rw -exec chmod g+rw '{}' \;
 RETVAL=$?
 if [ $RETVAL -ne 0 ]; then
     exit $RETVAL
@@ -82,7 +82,7 @@ if [ $RETVAL -ne 0 ]; then
     exit $RETVAL
 fi
 
-find "${application_dir}" -type f ! -perm -g=w -exec chmod g+w '{}' \;
+find "${application_dir}" -type f ! -perm -g+rw -exec chmod g+rw '{}' \;
 RETVAL=$?
 if [ $RETVAL -ne 0 ]; then
     exit $RETVAL
