@@ -62,14 +62,6 @@ if [ -e "${application_dir}/composer.phar" ]; then
     fi
 fi
 
-if [ -e "${application_dir}/composer.phar" ]; then
-    sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php composer.phar install --no-interaction
-    RETVAL=$?
-    if [ $RETVAL -ne 0 ]; then
-        exit $RETVAL
-    fi
-fi
-
 find "${application_dir}" ! -group $APACHE_RUN_GROUP -exec chgrp $APACHE_RUN_GROUP '{}' \;
 RETVAL=$?
 if [ $RETVAL -ne 0 ]; then
