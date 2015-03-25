@@ -55,10 +55,30 @@ if [ -e "${application_dir}/composer.phar" ]; then
         exit $RETVAL
     fi
 
-    sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php composer.phar install --no-interaction
-    RETVAL=$?
-    if [ $RETVAL -ne 0 ]; then
-        exit $RETVAL
+    if [ "x$APP_CREATE_PROJECT" = "x" ]; then
+        sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php composer.phar install --no-interaction
+        RETVAL=$?
+        if [ $RETVAL -ne 0 ]; then
+            exit $RETVAL
+        fi
+    else
+        if [ "x$APP_CREATE_PROJECT_VERSION" = "x" ]; then
+            sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php composer.phar create-project --no-interaction "$APP_CREATE_PROJECT" /tmp/app
+        else
+            sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php composer.phar create-project --no-interaction "$APP_CREATE_PROJECT" /tmp/app "$APP_CREATE_PROJECT_VERSION"
+        fi
+        RETVAL=$?
+        if [ $RETVAL -ne 0 ]; then
+            exit $RETVAL
+        fi
+
+        $( shopt -s dotglob nullglob && mv /tmp/app/* "${application_dir}" )
+        RETVAL=$?
+        if [ $RETVAL -ne 0 ]; then
+            exit $RETVAL
+        fi
+
+        rm -rf /tmp/app
     fi
 fi
 
