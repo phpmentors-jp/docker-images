@@ -42,15 +42,15 @@ if [ $RETVAL -ne 0 ]; then
     exit $RETVAL
 fi
 
-if [ "x$APP_DEPLOY_SCRIPT" != "x" ]; then
-    echo "$APP_DEPLOY_SCRIPT" | grep "^\/"
+if [ "x$APP_INIT_SCRIPT" != "x" ]; then
+    echo "$APP_INIT_SCRIPT" | grep "^\/"
     RETVAL=$?
     if [ $RETVAL -ne 0 ]; then
-        APP_DEPLOY_SCRIPT="/var/app/${APP_DEPLOY_SCRIPT}"
+        APP_INIT_SCRIPT="/var/app/${APP_INIT_SCRIPT}"
     fi
 
-    if [ -x "$APP_DEPLOY_SCRIPT" ]; then
-        "$APP_DEPLOY_SCRIPT"
+    if [ -x "$APP_INIT_SCRIPT" ]; then
+        "$APP_INIT_SCRIPT"
         RETVAL=$?
         if [ $RETVAL -ne 0 ]; then
             exit $RETVAL
