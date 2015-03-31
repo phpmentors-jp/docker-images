@@ -36,12 +36,6 @@ if [ $RETVAL -ne 0 ]; then
     exit $RETVAL
 fi
 
-pushd "$application_dir"
-RETVAL=$?
-if [ $RETVAL -ne 0 ]; then
-    exit $RETVAL
-fi
-
 if [ "x$APP_INIT_SCRIPT" != "x" ]; then
     echo "$APP_INIT_SCRIPT" | grep "^\/"
     RETVAL=$?
