@@ -115,5 +115,3 @@ if [ "x$APP_INIT_SCRIPT" != "x" ]; then
         fi
     fi
 fi
-
-exit 0
