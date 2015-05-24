@@ -12,7 +12,7 @@ RUN apt-get install -y apt-utils
 RUN apt-get install -y supervisor
 RUN apt-get install -y apache2-mpm-prefork
 RUN apt-get install -y mysql-client-core-5.6
-RUN apt-get install -y php5 php5-curl php5-intl php5-mysql php5-xdebug php5-apcu
+RUN apt-get install -y php5 php5-curl php5-intl php5-mysql php5-xdebug php5-apcu php5-dev
 RUN apt-get install -y git
 RUN apt-get install -y less vim-tiny
 RUN apt-get install -y apg
