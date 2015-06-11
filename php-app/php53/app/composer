@@ -3,4 +3,4 @@ APACHE_RUN_USER=www-data
 application_dir="/var/app"
 
 cd $application_dir
-sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php "${application_dir}/composer.phar" "$@"
+sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php -d memory_limit=-1 "${application_dir}/composer.phar" "$@"

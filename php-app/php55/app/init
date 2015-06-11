@@ -63,9 +63,9 @@ if [ -e "${application_dir}/composer.phar" ]; then
         fi
     else
         if [ "x$APP_CREATE_PROJECT_VERSION" = "x" ]; then
-            sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php composer.phar create-project --no-interaction "$APP_CREATE_PROJECT" /tmp/app
+            sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php -d memory_limit=-1 composer.phar create-project --no-interaction "$APP_CREATE_PROJECT" /tmp/app
         else
-            sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php composer.phar create-project --no-interaction "$APP_CREATE_PROJECT" /tmp/app "$APP_CREATE_PROJECT_VERSION"
+            sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php -d memory_limit=-1 composer.phar create-project --no-interaction "$APP_CREATE_PROJECT" /tmp/app "$APP_CREATE_PROJECT_VERSION"
         fi
         RETVAL=$?
         if [ $RETVAL -ne 0 ]; then
