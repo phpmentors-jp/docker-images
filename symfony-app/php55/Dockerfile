@@ -5,7 +5,7 @@
 FROM phpmentors/php-app:php55
 MAINTAINER KUBO Atsuhiro <kubo@iteman.jp>
 
-RUN apt-get install -y libfile-slurp-perl
+RUN apt-get install -y libfile-slurp-perl php5-sqlite
 
 # Apache2
 ENV APP_DOCUMENT_ROOT /var/app/web
