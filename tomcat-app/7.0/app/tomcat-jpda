@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "x$CATALINA_OPTS" = "x" ]; then
+    CATALINA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n" /usr/local/tomcat/bin/catalina.sh run
+else
+    CATALINA_OPTS="$CATALINA_OPTS -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n" /usr/local/tomcat/bin/catalina.sh run
+fi

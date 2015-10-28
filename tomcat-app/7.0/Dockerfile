@@ -33,6 +33,8 @@ ADD app/init /usr/local/sbin/app-init
 RUN chmod 755 /usr/local/sbin/app-init
 ADD app/mvn /usr/local/bin/mvn
 RUN chmod 755 /usr/local/bin/mvn
+ADD app/tomcat-jpda /usr/local/sbin/tomcat-jpda
+RUN chmod 755 /usr/local/sbin/tomcat-jpda
 
 # System
 RUN dpkg-reconfigure -f noninteractive locales
