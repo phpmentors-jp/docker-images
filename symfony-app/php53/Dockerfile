@@ -5,6 +5,7 @@
 FROM phpmentors/php-app:php53
 MAINTAINER KUBO Atsuhiro <kubo@iteman.jp>
 
+RUN apt-get update
 RUN apt-get install -y libfile-slurp-perl php5-sqlite
 
 # Apache2
