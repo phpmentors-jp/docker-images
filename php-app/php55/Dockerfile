@@ -59,6 +59,8 @@ ADD system/timezone.sh /usr/local/sbin/system-timezone.sh
 # Others
 ENV HOME /root
 WORKDIR /root
+RUN mkdir /var/app
+RUN echo "This file is a placeholder to expose /var/app directory after creating a new container from Kitematic." > /var/app/.placeholder
 VOLUME /var/app
 
 # Command
