@@ -5,7 +5,6 @@
 FROM tomcat:7.0
 MAINTAINER KUBO Atsuhiro <kubo@iteman.jp>
 
-RUN echo 'deb http://httpredir.debian.org/debian testing main' > /etc/apt/sources.list.d/testing.list
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get update
 RUN apt-get -y upgrade
