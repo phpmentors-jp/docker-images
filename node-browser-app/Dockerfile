@@ -2,7 +2,7 @@
 # node-browser-app
 #
 
-FROM node:0.12
+FROM node:5.4.1
 MAINTAINER KUBO Atsuhiro <kubo@iteman.jp>
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
