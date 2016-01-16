@@ -19,4 +19,5 @@ ADD system/locale.sh /usr/local/sbin/system-locale.sh
 ADD system/timezone.sh /usr/local/sbin/system-timezone.sh
 
 # Others
+RUN echo "This file is a placeholder to expose /var/app directory after creating a new container from Kitematic." > /etc/mysql/conf.d/.placeholder
 VOLUME /etc/mysql/conf.d
