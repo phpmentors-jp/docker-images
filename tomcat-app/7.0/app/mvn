@@ -1,7 +1,7 @@
 #!/bin/bash
 umask 0002
 JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
-MAVEN_HOME="/usr/local/maven"
+MAVEN_HOME="/usr/share/maven"
 application_dir="/var/app"
 
 cd $application_dir
