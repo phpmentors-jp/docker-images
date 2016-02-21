@@ -1,0 +1,9 @@
+--- app.conf.orig	2015-02-16 11:14:27.448623142 +0900
++++ app.conf	2015-02-16 11:14:32.340571211 +0900
+@@ -9,4 +9,6 @@
+ 
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+     ErrorLog ${APACHE_LOG_DIR}/error.log
++
++    PassEnv APP_RUN_MODE
+ </VirtualHost>

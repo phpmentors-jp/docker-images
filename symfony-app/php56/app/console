@@ -1,0 +1,6 @@
+#!/bin/bash
+APACHE_RUN_USER=www-data
+application_dir="/var/app"
+
+cd $application_dir
+sudo -u $APACHE_RUN_USER -E app/console "$@"
