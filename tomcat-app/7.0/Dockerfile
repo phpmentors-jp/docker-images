@@ -26,7 +26,7 @@ RUN sed -i "s/\(<tomcat-users>\)/\\1\\n  <role rolename=\"manager-gui\"\/>\\n  <
 # Tomcat application
 ENV MAVEN_VERSION 3.3.9
 ENV MAVEN_HOME /usr/share/maven
-RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share && mv /usr/share/apache-maven-$MAVEN_VERSION $MAVEN_HOME
+RUN curl -fsSLk https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share && mv /usr/share/apache-maven-$MAVEN_VERSION $MAVEN_HOME
 ADD app/init /usr/local/sbin/app-init
 RUN chmod 755 /usr/local/sbin/app-init
 ADD app/mvn /usr/local/bin/mvn
