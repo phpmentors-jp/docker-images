@@ -1,0 +1,23 @@
+#!/bin/bash
+
+typeset script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+. "$script_dir/php5-timezone.sh"
+. "$script_dir/system-locale.sh"
+. "$script_dir/system-timezone.sh"
+
+apt-get update
+
+if [ "x$LANG" != "x" ]; then
+    _system_locale_configure "$LANG"
+fi
+
+if [ "x$TZ" != "x" ]; then
+    _system_timezone_configure "$TZ"
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+        _php_timezone_configure "$TZ"
+    fi
+fi
+
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
