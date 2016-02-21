@@ -24,7 +24,6 @@ ADD supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN sed -i "s/\(<tomcat-users>\)/\\1\\n  <role rolename=\"manager-gui\"\/>\\n  <role rolename=\"manager-script\"\/>\\n  <user username=\"admin\" password=\"\" roles=\"manager-gui,manager-script\"\/>/" /usr/local/tomcat/conf/tomcat-users.xml
 
 # Tomcat application
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV MAVEN_VERSION 3.3.9
 ENV MAVEN_HOME /usr/share/maven
 RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share && mv /usr/share/apache-maven-$MAVEN_VERSION $MAVEN_HOME
