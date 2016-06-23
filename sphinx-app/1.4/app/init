@@ -1,0 +1,39 @@
+#!/bin/bash
+
+script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+application_dir="/var/app"
+
+if [ ! -d "$application_dir" ]; then
+    echo "ERROR: \"$application_dir\" does not exist. Mount your Sphinx project root as \"$application_dir\" on the host."
+
+    exit 1
+fi
+
+find "${application_dir}" -type d ! -perm 2775 -exec chmod 2775 '{}' \;
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+    exit $RETVAL
+fi
+
+find "${application_dir}" -type f ! -perm -g+rw -exec chmod g+rw '{}' \;
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+    exit $RETVAL
+fi
+
+if [ "x$APP_INIT_SCRIPT" != "x" ]; then
+    echo "$APP_INIT_SCRIPT" | grep "^\/"
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]; then
+        APP_INIT_SCRIPT="/var/app/${APP_INIT_SCRIPT}"
+    fi
+
+    if [ -x "$APP_INIT_SCRIPT" ]; then
+        "$APP_INIT_SCRIPT"
+        RETVAL=$?
+        if [ $RETVAL -ne 0 ]; then
+            exit $RETVAL
+        fi
+    fi
+fi
