@@ -22,11 +22,17 @@ if [ $RETVAL -ne 0 ]; then
     exit $RETVAL
 fi
 
+ln -sf "${APP_DOCUMENT_ROOT}" /usr/share/nginx/html
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+    exit $RETVAL
+fi
+
 if [ "x$APP_INIT_SCRIPT" != "x" ]; then
     echo "$APP_INIT_SCRIPT" | grep "^\/"
     RETVAL=$?
     if [ $RETVAL -ne 0 ]; then
-        APP_INIT_SCRIPT="/var/app/${APP_INIT_SCRIPT}"
+        APP_INIT_SCRIPT="${application_dir}/${APP_INIT_SCRIPT}"
     fi
 
     if [ -x "$APP_INIT_SCRIPT" ]; then

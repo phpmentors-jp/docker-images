@@ -2,7 +2,7 @@
 # sphinx-app
 #
 
-FROM java:openjdk-7-jdk
+FROM nginx:1.10
 MAINTAINER KUBO Atsuhiro <kubo@iteman.jp>
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -14,14 +14,23 @@ RUN apt-get install -y supervisor
 RUN apt-get install -y less vim-tiny
 RUN apt-get install -y build-essential
 RUN apt-get install -y python-dev
+RUN apt-get install -y curl
 
 # Supervisor
 RUN mkdir -p /var/log/supervisor
 ADD supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Nginx
+ENV APP_DOCUMENT_ROOT /var/app/_build/html
+RUN rm -rf /usr/share/nginx/html
+
 # Sphinx
 RUN curl -fsSLk https://bootstrap.pypa.io/get-pip.py | python
 RUN /usr/local/bin/pip install -U sphinx
+
+# Sphinx application
+ADD app/init /usr/local/sbin/app-init
+RUN chmod 755 /usr/local/sbin/app-init
 
 # System
 RUN dpkg-reconfigure -f noninteractive locales
