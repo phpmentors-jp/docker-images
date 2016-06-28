@@ -6,7 +6,7 @@
 * [phpmentors/mysql](https://registry.hub.docker.com/u/phpmentors/mysql/) based on [mysql](https://registry.hub.docker.com/_/mysql/)
 * [phpmentors/node-browser-app](https://registry.hub.docker.com/u/phpmentors/node-browser-app/) based on [node](https://registry.hub.docker.com/_/node/)
 * [phpmentors/php-app](https://registry.hub.docker.com/u/phpmentors/php-app/) based on [ubuntu](https://registry.hub.docker.com/_/ubuntu/)
-* [phpmentors/sphinx-app](https://hub.docker.com/r/phpmentors/maven-app/) based on [java](https://hub.docker.com/_/java/)
+* [phpmentors/sphinx-app](https://hub.docker.com/r/phpmentors/sphinx-app/) based on [nginx](https://hub.docker.com/_/nginx/)
 * [phpmentors/symfony-app](https://registry.hub.docker.com/u/phpmentors/symfony-app/) based on [phpmentors/php-app](https://registry.hub.docker.com/u/phpmentors/php-app/)
 * [phpmentors/tomcat-app](https://registry.hub.docker.com/u/phpmentors/tomcat-app/) based on [tomcat](https://registry.hub.docker.com/_/tomcat/)
 
