@@ -27,6 +27,7 @@ RUN rm -rf /usr/share/nginx/html
 # Sphinx
 RUN curl -fsSLk https://bootstrap.pypa.io/get-pip.py | python
 RUN /usr/local/bin/pip install -U sphinx
+RUN /usr/local/bin/pip install -U sphinx-intl
 
 # Sphinx application
 ADD app/init /usr/local/sbin/app-init
