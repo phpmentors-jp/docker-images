@@ -41,7 +41,7 @@ if [ $RETVAL -ne 0 ]; then
 fi
 
 if [ ! -e "${application_dir}/composer.phar" ]; then
-    sudo -u $APACHE_RUN_USER php -r "readfile('https://getcomposer.org/installer');" | sudo -u $APACHE_RUN_USER php
+    sudo -u $APACHE_RUN_USER php -r "readfile('https://getcomposer.org/installer');" | sudo -u $APACHE_RUN_USER COMPOSER_HOME="${application_dir}/.composer" php
     RETVAL=$?
     if [ $RETVAL -ne 0 ]; then
         exit $RETVAL
