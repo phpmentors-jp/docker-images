@@ -1,0 +1,16 @@
+#!/bin/bash
+APACHE_RUN_USER=www-data
+application_dir="/var/app"
+
+if [ -e "$application_dir/bin/console" ]; then
+    console_script="$application_dir/bin/console"
+elif [ -e "$application_dir/app/console" ]; then
+    console_script="$application_dir/app/console"
+else
+    echo "ERROR: Neither \"bin/console\" nor \"app/console\" does not exist in the application directory \"$application_dir\"."
+
+    exit 1
+fi
+
+cd $application_dir
+sudo -u $APACHE_RUN_USER -E "$console_script" "$@"
