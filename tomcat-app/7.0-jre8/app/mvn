@@ -1,0 +1,8 @@
+#!/bin/bash
+umask 0002
+
+MAVEN_HOME="/usr/share/maven"
+application_dir="/var/app"
+
+cd $application_dir
+"${MAVEN_HOME}/bin/mvn" "$@"
