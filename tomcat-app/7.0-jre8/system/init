@@ -1,0 +1,16 @@
+#!/bin/bash
+
+typeset script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+. "$script_dir/system-locale.sh"
+. "$script_dir/system-timezone.sh"
+
+if [ "x$LANG" != "x" ]; then
+    _system_locale_configure "$LANG"
+fi
+
+if [ "x$TZ" != "x" ]; then
+    _system_timezone_configure "$TZ"
+fi
+
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
