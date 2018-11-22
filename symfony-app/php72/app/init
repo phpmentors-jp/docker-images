@@ -1,0 +1,70 @@
+#!/bin/bash
+
+script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+application_dir="/var/app"
+parameters_file="${application_dir}/app/config/parameters.yml"
+secret=`apg -a 1 -M nl -n 1 -m 40 -E ghijklmnopqrstuvwxyz`
+linked_database="0"
+
+printenv | grep '_TCP_ADDR=.*' 2>&1 > /dev/null
+RETVAL=$?
+if [ $RETVAL -eq 0 ]; then
+    printenv | grep '_TCP_PORT=.*' 2>&1 >/dev/null
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+        linked_database="1"
+    fi
+fi
+
+if [ $linked_database = "1" ]; then
+    database_driver="pdo_mysql"
+    database_host="$MYSQL_PORT_3306_TCP_ADDR"
+    database_port="$MYSQL_PORT_3306_TCP_PORT"
+    database_user="root"
+    database_password="$MYSQL_ENV_MYSQL_ROOT_PASSWORD"
+fi
+
+if [ $linked_database = "1" ]; then
+    sed -i "s/^\\( *database_driver:\\).*/\\1 ${database_driver}/" "$parameters_file"
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]; then
+        exit $RETVAL
+    fi
+
+    sed -i "s/^\\( *database_host:\\).*/\\1 ${database_host}/" "$parameters_file"
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]; then
+        exit $RETVAL
+    fi
+
+    sed -i "s/^\\( *database_port:\\).*/\\1 ${database_port}/" "$parameters_file"
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]; then
+        exit $RETVAL
+    fi
+
+    sed -i "s/^\\( *database_user:\\).*/\\1 ${database_user}/" "$parameters_file"
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]; then
+        exit $RETVAL
+    fi
+
+    sed -i "s/^\\( *database_password:\\).*/\\1 ${database_password}/" "$parameters_file"
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]; then
+        exit $RETVAL
+    fi
+fi
+
+sed -i "s/^\\( *secret:\\).*/\\1 ${secret}/" "$parameters_file"
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+    exit $RETVAL
+fi
+
+"$script_dir/app-make-app-accessible" "$application_dir"
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+    exit $RETVAL
+fi
