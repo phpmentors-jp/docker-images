@@ -1,0 +1,21 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+use File::Slurp;
+
+my $application_dir = $ARGV[0];
+my $app_dev = read_file("$application_dir/web/app_dev.php");
+unless ($app_dev) {
+    exit(1);
+}
+
+unless ($app_dev =~ /if\s*\(\s*\@\$_SERVER\['APP_RUN_MODE'\] != 'dev'/) {
+    $app_dev =~ s/(if\s*\()(.+?)(\s*\) \{\s*header\('HTTP\/1\.0 403 Forbidden'\);)/$1\@\$_SERVER['APP_RUN_MODE'] != 'dev'\n    && ($2)$3/s;
+    my $result = write_file("$application_dir/web/app_dev.php", $app_dev);
+    unless ($result) {
+        exit(1);
+    }
+}
+
+exit(0);
