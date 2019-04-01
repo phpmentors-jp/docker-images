@@ -42,8 +42,8 @@ RUN sed -i "s/^\\( *export \+LANG.*\\)/#\\1/" /etc/apache2/envvars
 # PHP
 ENV PHP_INI ""
 ENV XDEBUG_REMOTE_PORT ""
-ADD php7/app.ini /etc/php/7.1/apache2/conf.d/90-app.ini
-ADD php7/app.ini /etc/php/7.1/cli/conf.d/90-app.ini
+ADD php7/app.ini /etc/php/7.2/apache2/conf.d/90-app.ini
+ADD php7/app.ini /etc/php/7.2/cli/conf.d/90-app.ini
 ADD php7/timezone.sh /usr/local/sbin/php7-timezone.sh
 
 # PHP application
